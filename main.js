@@ -157,7 +157,7 @@ function showFilters(books) {
 
   let html = '';
   html += `<div class="col-sm-12">`
-  html += `<a>Filters:</a>`
+  html += `<div class="col-sm-8"><a>Filters:</a></div>`
   html += `<div class="col-sm-11">` 
   html += `<label class="col-sm-4"> Category:`;
   html += `<select class="categoryFilter" id="categoryFilter">`;
@@ -181,6 +181,15 @@ function showFilters(books) {
   html += `</select>`;
   html += `</label>`;
   html += `</div>`;
+  html += `<div class="col-sm-11">` 
+  html += `<a>Sorts:</a>`
+  html += `<button class="btn btn-outline-dark sort-title-asc-btn"> Title Asc </button>`;
+  html += `<button class="btn btn-outline-dark sort-title-desc-btn"> Title Desc</button>`;
+  html += `<button class="btn btn-outline-dark sort-price-asc-btn"> Price Asc </button>`;
+  html += `<button class="btn btn-outline-dark sort-price-desc-btn"> Price Desc </button>`;
+  html += `<button class="btn btn-outline-dark sort-author-asc-btn"> Author Asc </button>`;
+  html += `<button class="btn btn-outline-dark sort-author-desc-btn"> Author Desc </button> `;
+  html += `</div>`
   html += `</div>`;
 
   document.querySelector('.filters').innerHTML = html;
@@ -233,7 +242,38 @@ function showFilters(books) {
     filterCategory.selectedIndex = 0;
     filterAuthor.selectedIndex = 0;
   })
+
+  document.querySelector('.sort-price-asc-btn').addEventListener('click', event => {
+    let sortedBooks = sortByPriceAsc(books);
+    populateMainPage(sortedBooks);
+  })
+
+  document.querySelector('.sort-price-desc-btn').addEventListener('click', event => {
+    console.log(event);
+    let sortedBooks = sortByPriceDesc(books);
+    populateMainPage(sortedBooks);
+  })
+
+  document.querySelector('.sort-title-asc-btn').addEventListener('click', event => {
+    let sortedBooks = sortByTitleAsc(books);
+    populateMainPage(sortedBooks);
+  })
+  document.querySelector('.sort-title-desc-btn').addEventListener('click', event => {
+    let sortedBooks = sortByTitleDesc(books);
+    populateMainPage(sortedBooks);
+  })
+
+  document.querySelector('.sort-author-asc-btn').addEventListener('click', event => {
+    let sortedBooks = sortByAuthorAsc(books);
+    populateMainPage(sortedBooks);
+  })
+
+  document.querySelector('.sort-author-desc-btn').addEventListener('click', event => {
+    let sortedBooks = sortByAuthorDesc(books);
+    populateMainPage(sortedBooks);
+  })
 }
+
 
 function getTotalFromCart() {
   let totalPrice = 0;
@@ -279,6 +319,66 @@ function doFilterPrice(books, filter) {
   return newBooks;
 }
 
+function sortByPriceAsc(books) {
+  return books.sort((a, b) => a.price - b.price);
+}
+function sortByPriceDesc(books) {
+  return books.sort((a, b) =>  b.price - a.price);
+}
+
+function sortByTitleAsc(books, sortBy) {
+  const sortedArr = books.sort((a, b) => {
+    if (a.title < b.title) {
+      return -1;
+    }
+    if (a.title > b.title) {
+      return 1;
+    }
+    return 0;
+  });
+  return sortedArr;
+}
+
+function sortByTitleDesc(books, sortBy) {
+  const sortedArr = books.sort((a, b) => {
+    if (a.title > b.title) {
+      return -1;
+    }
+    if (a.title < b.title) {
+      return 1;
+    }
+    return 0;
+  });
+  return sortedArr;
+}
+
+function sortByAuthorAsc(books, sortBy) {
+  const sortedArr = books.sort((a, b) => {
+    if (a.author < b.author) {
+      return -1;
+    }
+    if (a.author > b.author) {
+      return 1;
+    }
+    return 0;
+  });
+  return sortedArr;
+}
+
+function sortByAuthorDesc(books, sortBy) {
+  const sortedArr = books.sort((a, b) => {
+    if (a.author> b.author) {
+      return -1;
+    }
+    if (a.author < b.author) {
+      return 1;
+    }
+    return 0;
+  });
+  return sortedArr;
+}
+
+
 function addtoCart(book) {
 //increment qty if same title is added
   if (cart.find(e => e.title === book.title)) {
@@ -296,7 +396,8 @@ function addtoCart(book) {
 
 async function start() {
   let books = await getJSON('/bookdata.json');
-  showFilters(books)
+  showFilters(books);
+  //showSort(books);
   populateMainPage(books);
 
   document.querySelector(".navbar-cart").addEventListener('click', event => {
