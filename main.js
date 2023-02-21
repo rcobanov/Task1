@@ -9,10 +9,24 @@ async function getJSON(url) {
   return data;
 }
 
+function deleteRowFromCart(row) {
+  const modal = document.querySelector('.modal');
+  if (row.qty > 1) {
+    row.qty--;
+    modal.remove()
+    openCartModal(cart)
+  } else {
+    cart = cart.filter((data) => {
+      return data.title !== row.title;
+    })
+    modal.remove();
+    openCartModal(cart);
+  }
+}
+
 
 function openCartModal(cart) {
   const totalPrice = getTotalFromCart();
-  console.log(cart)
   let modalHtml = ''
   modalHtml += `<div class="modal">`
   modalHtml += `<div class="modal-content">`
@@ -22,12 +36,14 @@ function openCartModal(cart) {
   modalHtml += `<th>Title</th>
                 <th>Price</th>
                 <th>Quantity</th>
-                <th>Row Total</th>`
+                <th>Row Total</th>
+                <th></th>`
   modalHtml += `${cart.map(book => `<tr>
                <td>${book.title}</td>
                <td>${book.price}.00$</td>
                <td>${book.qty}</td>
-               <td>${book.price*book.qty}.00$</td>
+               <td>${book.price * book.qty}.00$</td>
+               <td><button class="btn btn-outline-dark w-10 bi bi-trash modal-delete-btn"></button></td>
                </tr>
                </option>`).join('')}`;
   modalHtml += `<tr>
@@ -35,17 +51,27 @@ function openCartModal(cart) {
                 <td></td>
                 <td>Total: ${totalPrice}.00$</td>
                 </tr>`
-  modalHtml += `</table>` 
+  modalHtml += `</table>`
   modalHtml += `</div>`
   modalHtml += `</div>`
   document.body.insertAdjacentHTML('beforeend', modalHtml);
 
-  const modal = document.querySelector('.modal');
-  const closeBtn = modal.querySelector('.close-modal');
-  closeBtn.addEventListener('click', () => {
-    modal.remove();
-  });
-}
+  // add event listener to each detail button
+  const deleteButtons = document.querySelectorAll('.modal-delete-btn');
+  for (let i = 0; i < deleteButtons.length; i++) {
+    const row = cart[i];
+    deleteButtons[i].addEventListener('click', () => {
+      deleteRowFromCart(row);
+    });
+  }
+
+    const modal = document.querySelector('.modal');
+    const closeBtn = modal.querySelector('.close-modal');
+    closeBtn.addEventListener('click', () => {
+      modal.remove();
+    });
+  }
+
 
 
 function openModal(book) {
@@ -170,7 +196,6 @@ function addtoCart(book) {
   } else { // else push it to cart array
     cart.push({ title: book.title, qty: 1, price: book.price })
   }
-  console.log(cart)
 }
 
 
