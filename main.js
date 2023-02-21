@@ -29,6 +29,7 @@ function openCartModal(cart) {
   const totalPrice = getTotalFromCart();
   let modalHtml = ''
   modalHtml += `<div class="modal">`
+  modalHtml += `<div class="modal-dialog modal-lg">`
   modalHtml += `<div class="modal-content">`
   modalHtml += `<button type="button" class="btn-close float-end close-modal" aria-label="Close"></button>`
   modalHtml += `<p>Cart</p>`
@@ -55,6 +56,7 @@ function openCartModal(cart) {
   modalHtml += `</table>`
   modalHtml += `</div>`
   modalHtml += `</div>`
+  modalHtml += `</div>`
   document.body.insertAdjacentHTML('beforeend', modalHtml);
 
   // add event listener to each detail button
@@ -79,22 +81,33 @@ function openModal(book) {
   console.log('Im clicked ' + book.title);
   let modalHtml = ''
   modalHtml += `<div class="modal">`
+  modalHtml += `<div class="modal-dialog modal-lg">`
   modalHtml += `<div class="modal-content">`
   modalHtml += `<button type="button" class="btn-close float-end close" aria-label="Close"></button>`
-  modalHtml += '<img src="./images/dummy.jpg" >'
+  modalHtml += '<img src="./images/dummy.jpg" class="rounded mx-auto d-block">'
   modalHtml += `<div> Price: ${book.price}$ </div>` 
   modalHtml += `<div class="booktitle"> ${book.title} </div>`
   modalHtml += `<div class="description"> ${book.description} </div>`
   modalHtml += `<div class="author"> ${book.author} </div>`
+  modalHtml += `<div> <button class="btn btn-outline-dark w-90 modal-cart-btn"> Add to Cart </button> </div>`
+  modalHtml += `</div>`
   modalHtml += `</div>`
   modalHtml += `</div>`
   document.body.insertAdjacentHTML('beforeend', modalHtml);
 
   const modal = document.querySelector('.modal');
+
+  //create deleteButton listener
   const closeBtn = modal.querySelector('.close');
   closeBtn.addEventListener('click', () => {
     modal.remove();
   });
+  //create add to cart button listener
+  const addBtn = modal.querySelector('.modal-cart-btn');
+  addBtn.addEventListener('click', () => {
+    addtoCart(book)
+    modal.remove();
+  })
 }
 
 function populateMainPage(books) {
