@@ -1,0 +1,106 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body{
+  padding-top:100px;
+  background-color: rgba(124, 91, 41, 0.249)
+}
+
+main{
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.row{
+  max-width: 100%
+}
+
+
+.col-sm-2{
+  background-color: white;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.buttons {
+  margin-top:auto;
+
+}
+
+button{
+  margin: 5px
+}
+
+img{
+  width: 100%;
+}
+
+.booktitle{
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+.author{
+  font-weight:200;
+  font-size: 0.8em;
+}
+
+/* Navbar */
+
+.navbar-cart{
+  border-radius:10px;
+  font-size: 2rem;
+}
+
+.navbar-brand{
+  color:white;
+  font-weight: bold;
+  border: 7px solid white;
+  border-radius: 10px;
+  padding: 0.5em;
+}
+
+.navbar{
+  width:100%;
+  background-color: rgba(183, 143, 109, 0.823);
+}
+
+.container{
+  width: 90%
+}
+
+/* Modals, when pressing the details button */
+.modal{
+  width: 100%;
+  display:block;
+  background-color: rgba(0,0,0, .5);
+}
+
+.modal-content{
+  /*max-width:400px;*/
+  max-width: 80%;
+  display:block;
+  top: 20%;
+  margin: 0 auto;
+}
+
+.modal-content p{
+  padding: 3px;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.modal img{
+  max-width: 30%;
+}
+
+.close-modal{
+  float: right;
+}

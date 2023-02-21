@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "title": "Responsive design with Bootstrap",
+    "author": "Some Author",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "UX",
+    "price": 150
+  },
+  {
+    "id": 2,
+    "title": "Don't make me think",
+    "author": "Steve Krug",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "UX",
+    "price": 150
+  },
+  {
+    "id": 3,
+    "title": "100 Things Every Designer needs to know about People",
+    "author": "Susan M.Weinschenk",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "UX",
+    "price": 150
+  },
+  {
+    "id": 4,
+    "title": "The User Experience Team of One: A Research and Design Survival Guide",
+    "author": "Leah Buley",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "UX",
+    "price": 150
+  },
+  {
+    "id": 5,
+    "title": "Seductive Interaction design",
+    "author": "Stephen Anderson",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "UX",
+    "price": 150
+  },
+  {
+    "id": 6,
+    "title": "HTML- an introduction",
+    "author": "Some author",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "HTML",
+    "price": 150
+  },
+  {
+    "id": 7,
+    "title": "Learn HTML For Beginners: the Illustrated guide to Coding",
+    "author": "Jo Foster",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "HTML",
+    "price": 150
+  },
+  {
+    "id": 8,
+    "title": "HTML for Web Designers",
+    "author": "Jeremy Keith:",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "HTML",
+    "price": 150
+  },
+  {
+    "id": 9,
+    "title": "HTML5 Pocket Reference",
+    "author": "Jennifer Niederst Robbins",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "HTML",
+    "price": 150
+  },
+  {
+    "id": 10,
+    "title": "HTML For Dummies",
+    "author": "Stephen Andy Harris",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "HTML",
+    "price": 150
+  },
+  {
+    "id": 11,
+    "title": "CSS - an introduction",
+    "author": "Some author",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "CSS",
+    "price": 150
+  },
+  {
+    "id": 12,
+    "title": "CSS For Dummies 1",
+    "author": "Stephen Andy Harris",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "CSS",
+    "price": 150
+  },
+  {
+    "id": 13,
+    "title": "CSS For Dummies 2",
+    "author": "Stephen Andy Harris",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "CSS",
+    "price": 150
+  },
+  {
+    "id": 14,
+    "title": "CSS For Dummies 3",
+    "author": "Stephen Andy Harris",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "CSS",
+    "price": 150
+  },
+  {
+    "id": 15,
+    "title": "CSS For Dummies 4",
+    "author": "Stephen Andy Harris",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "CSS",
+    "price": 150
+  },
+  {
+    "id": 16,
+    "title": "JavaScript - An introduction",
+    "author": "Stephen Andy Harris",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "JavaScript",
+    "price": 150
+  },
+  {
+    "id": 17,
+    "title": "JS For Dummies 1",
+    "author": "Stephen Andy Harris",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "JavaScript",
+    "price": 150
+  },
+  {
+    "id": 18,
+    "title": "JS For Dummies 2",
+    "author": "Stephen Andy Harris",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "JavaScript",
+    "price": 150
+  },
+  {
+    "id": 19,
+    "title": "JS For Dummies 3",
+    "author": "Stephen Andy Harris",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "JavaScript",
+    "price": 150
+  },
+  {
+    "id": 20,
+    "title": "JS For Dummies 4",
+    "author": "Stephen Andy Harris",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
+    "category": "JavaScript",
+    "price": 150
+  }
+]
