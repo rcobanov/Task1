@@ -9,8 +9,10 @@ async function getJSON(url) {
   return data;
 }
 
+
 function openCartModal(cart) {
   const totalPrice = getTotalFromCart();
+  console.log(cart)
   let modalHtml = ''
   modalHtml += `<div class="modal">`
   modalHtml += `<div class="modal-content">`
@@ -18,14 +20,14 @@ function openCartModal(cart) {
   modalHtml += `<p>Cart</p>`
   modalHtml += '<table id="table" class="table table-striped" style ="margin: 0px auto;">'
   modalHtml += `<th>Title</th>
-                <th>Category</th>
-                <th>Author</th>
-                <th>Price</th>`
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Row Total</th>`
   modalHtml += `${cart.map(book => `<tr>
                <td>${book.title}</td>
-               <td>${book.category}</td>
-               <td>${book.author}</td>
                <td>${book.price}.00$</td>
+               <td>${book.qty}</td>
+               <td>${book.price*book.qty}.00$</td>
                </tr>
                </option>`).join('')}`;
   modalHtml += `<tr>
@@ -107,7 +109,6 @@ function populateMainPage(books) {
       });
     }
   
-  
 }
 
 function showFilters(books) {
@@ -140,9 +141,8 @@ function showFilters(books) {
 function getTotalFromCart() {
   let totalPrice = 0;
   cart.forEach(element => {
-    totalPrice += element.price;
+    totalPrice += element.price*element.qty;
   });
-
   return totalPrice;
 }
 
@@ -159,7 +159,18 @@ function doFilter(books, filter) {
 }
 
 function addtoCart(book) {
-  cart.push(book)
+//increment qty if same title is added
+  if (cart.find(e => e.title === book.title)) {
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].title === book.title) {
+        cart[i].qty++;
+        break;
+      }
+    }
+  } else { // else push it to cart array
+    cart.push({ title: book.title, qty: 1, price: book.price })
+  }
+  console.log(cart)
 }
 
 
