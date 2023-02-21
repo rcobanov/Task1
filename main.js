@@ -113,7 +113,7 @@ function openModal(book) {
 function populateMainPage(books) {
   let html = '';
 
-  html += '<div class="row">'
+  html += '<div class="row justify-content-center">'
   for (let book of books) {
     html += '<div class="col-sm-2">';
     html += '<img src="./images/dummy.jpg" >';
@@ -156,29 +156,83 @@ function showFilters(books) {
   let authors = getAuthors(books);
 
   let html = '';
-  html += `<label> Filter:`;
-  html += `<select class="categoryFilter">`;
+  html += `<div class="col-sm-12">`
+  html += `<a>Filters:</a>`
+  html += `<div class="col-sm-11">` 
+  html += `<label class="col-sm-4"> Category:`;
+  html += `<select class="categoryFilter" id="categoryFilter">`;
   html += `<option>all</option>`;
   html += `${categories.map(category => `<option>${category}</option>`).join('')}`;
+  html += `</select>`;
+  html += `</label>`;
+  html += `<label class="col-sm-4"> Author:`;
+  html += `<select class="authorFilter" id="authorFilter">`;
+  html += `<option>all</option>`;
   html += `${authors.map(author => `<option>${author}</option>`).join('')}`;
   html += `</select>`;
   html += `</label>`;
+  html += `<label class="col-sm-4">Price Interval:`;
+  html += `<select class="priceFilter" id="priceFilter">`;
+  html += `<option>all</option>`;
+  html += `<option>0 - 100</option>`;
+  html += `<option>100 - 200</option>`;
+  html += `<option>200 - 300</option>`;
+  html += `<option>300 - 400</option>`;
+  html += `</select>`;
+  html += `</label>`;
+  html += `</div>`;
+  html += `</div>`;
 
   document.querySelector('.filters').innerHTML = html;
 
-  //event listener
+
+  //event listeners
 
   document.querySelector('.categoryFilter').addEventListener('change', event => {
+    const filterAuthor = document.getElementById('authorFilter')
+    const filterPrice = document.getElementById('priceFilter')
     console.log(event.target.value)
     let selectedCategory = event.target.value;
-    let booksWithCategory = doFilter(books, selectedCategory)
     if (selectedCategory === 'all') {
       populateMainPage(books);
     } else {
+      let booksWithCategory = doFilterCategory(books, selectedCategory)
       populateMainPage(booksWithCategory);
     }
+    filterAuthor.selectedIndex = 0;
+    filterPrice.selectedIndex = 0;
   })
 
+  document.querySelector('.authorFilter').addEventListener('change', event => {
+    console.log(event.target.value)
+    const filterCategory = document.getElementById('categoryFilter')
+    const filterPrice= document.getElementById('priceFilter')
+    console.log(filterCategory)
+    let selectedCategory = event.target.value;
+    if (selectedCategory === 'all') {
+      populateMainPage(books);
+    } else {
+      let booksWithCategory = doFilterAuthor(books, selectedCategory)
+      populateMainPage(booksWithCategory);
+    }
+    filterCategory.selectedIndex = 0;
+    filterPrice.selectedIndex = 0;
+    
+  })
+
+  document.querySelector('.priceFilter').addEventListener('change', event => {
+    const filterCategory = document.getElementById('categoryFilter')
+    const filterAuthor= document.getElementById('authorFilter')
+    let selectedCategory = event.target.value;
+    if (selectedCategory === 'all') {
+      populateMainPage(books);
+    } else {
+      let booksWithCategory = doFilterPrice(books, selectedCategory)
+      populateMainPage(booksWithCategory);
+    }
+    filterCategory.selectedIndex = 0;
+    filterAuthor.selectedIndex = 0;
+  })
 }
 
 function getTotalFromCart() {
@@ -198,10 +252,30 @@ function getAuthors(books) {
   return [... new Set(withDuplicates)];
 }
 
-function doFilter(books, filter) {
+function doFilterCategory(books, filter) {
   let newBooks = books.filter((book) => {
     return book.category === filter;
   })  
+  return newBooks;
+}
+
+function doFilterAuthor(books, filter) {
+  let newBooks = books.filter((book) => {
+    console.log(book.author === filter)
+    return book.author === filter;
+  })  
+  console.log(newBooks);
+  return newBooks;
+}
+
+function doFilterPrice(books, filter) {
+  const parts = filter.split('-');
+  let lower = parts[0].trim();
+  let upper = parts[1].trim();
+  let newBooks = books.filter((book) => {
+    return book.price >= lower && book.price <= upper;
+  })  
+
   return newBooks;
 }
 
