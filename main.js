@@ -153,12 +153,14 @@ function populateMainPage(books) {
 
 function showFilters(books) {
   let categories = getCategories(books);
+  let authors = getAuthors(books);
 
   let html = '';
-  html += `<label> Categories:`;
+  html += `<label> Filter:`;
   html += `<select class="categoryFilter">`;
   html += `<option>all</option>`;
-  html += `${categories.map(category => `<option> ${category}</option>`).join('')}`;
+  html += `${categories.map(category => `<option>${category}</option>`).join('')}`;
+  html += `${authors.map(author => `<option>${author}</option>`).join('')}`;
   html += `</select>`;
   html += `</label>`;
 
@@ -167,6 +169,7 @@ function showFilters(books) {
   //event listener
 
   document.querySelector('.categoryFilter').addEventListener('change', event => {
+    console.log(event.target.value)
     let selectedCategory = event.target.value;
     let booksWithCategory = doFilter(books, selectedCategory)
     if (selectedCategory === 'all') {
@@ -188,6 +191,10 @@ function getTotalFromCart() {
 
 function getCategories(books) {
   let withDuplicates = books.map(book => book.category);
+  return [... new Set(withDuplicates)];
+}
+function getAuthors(books) {
+  let withDuplicates = books.map(book => book.author);
   return [... new Set(withDuplicates)];
 }
 
