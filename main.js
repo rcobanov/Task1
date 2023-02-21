@@ -11,17 +11,17 @@ async function getJSON(url) {
 
 function deleteRowFromCart(row) {
   const modal = document.querySelector('.modal');
+  //make changes to qty or remove modal
   if (row.qty > 1) {
     row.qty--;
-    modal.remove()
-    openCartModal(cart)
   } else {
     cart = cart.filter((data) => {
       return data.title !== row.title;
     })
-    modal.remove();
-    openCartModal(cart);
   }
+  //remove the modal and open it again
+  modal.remove();
+  openCartModal(cart);
 }
 
 
@@ -50,6 +50,7 @@ function openCartModal(cart) {
                 <td><td>
                 <td></td>
                 <td>Total: ${totalPrice}.00$</td>
+                <td></td>
                 </tr>`
   modalHtml += `</table>`
   modalHtml += `</div>`
