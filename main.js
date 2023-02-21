@@ -243,32 +243,82 @@ function showFilters(books) {
     filterAuthor.selectedIndex = 0;
   })
 
+  //Handle sorts
+  const titleAscBtn = document.querySelector('.sort-title-asc-btn');
+  const titleDescBtn = document.querySelector('.sort-title-desc-btn');
+  const priceAscBtn = document.querySelector('.sort-price-asc-btn');
+  const priceDescBtn = document.querySelector('.sort-price-desc-btn');
+  const authorAscBtn = document.querySelector('.sort-author-asc-btn');
+  const authorDescBtn = document.querySelector('.sort-author-desc-btn');
+
   document.querySelector('.sort-price-asc-btn').addEventListener('click', event => {
+    priceAscBtn.classList.add('active');
+    // remove active class from other buttons
+    titleDescBtn.classList.remove('active');
+    titleAscBtn.classList.remove('active');
+    priceDescBtn.classList.remove('active');
+    authorAscBtn.classList.remove('active');
+    authorDescBtn.classList.remove('active');
     let sortedBooks = sortByPriceAsc(books);
     populateMainPage(sortedBooks);
   })
 
   document.querySelector('.sort-price-desc-btn').addEventListener('click', event => {
+    priceDescBtn.classList.add('active');
+    // remove active class from other buttons
+    titleDescBtn.classList.remove('active');
+    titleAscBtn.classList.remove('active');
+    priceAscBtn.classList.remove('active');
+    authorAscBtn.classList.remove('active');
+    authorDescBtn.classList.remove('active');
     console.log(event);
     let sortedBooks = sortByPriceDesc(books);
     populateMainPage(sortedBooks);
   })
 
   document.querySelector('.sort-title-asc-btn').addEventListener('click', event => {
+    titleAscBtn.classList.add('active');
+    // remove active class from other buttons
+    titleDescBtn.classList.remove('active');
+    priceAscBtn.classList.remove('active');
+    priceDescBtn.classList.remove('active');
+    authorAscBtn.classList.remove('active');
+    authorDescBtn.classList.remove('active');
     let sortedBooks = sortByTitleAsc(books);
     populateMainPage(sortedBooks);
   })
   document.querySelector('.sort-title-desc-btn').addEventListener('click', event => {
+    titleDescBtn.classList.add('active');
+    // remove active class from other buttons
+    titleAscBtn.classList.remove('active');
+    priceAscBtn.classList.remove('active');
+    priceDescBtn.classList.remove('active');
+    authorAscBtn.classList.remove('active');
+    authorDescBtn.classList.remove('active');
     let sortedBooks = sortByTitleDesc(books);
     populateMainPage(sortedBooks);
   })
 
   document.querySelector('.sort-author-asc-btn').addEventListener('click', event => {
+    authorAscBtn.classList.add('active');
+    // remove active class from other buttons
+    titleDescBtn.classList.remove('active');
+    titleAscBtn.classList.remove('active');
+    priceAscBtn.classList.remove('active');
+    priceDescBtn.classList.remove('active');
+    authorDescBtn.classList.remove('active');
     let sortedBooks = sortByAuthorAsc(books);
     populateMainPage(sortedBooks);
   })
 
   document.querySelector('.sort-author-desc-btn').addEventListener('click', event => {
+    authorDescBtn.classList.add('active');
+    // remove active class from other buttons
+    titleDescBtn.classList.remove('active');
+    titleAscBtn.classList.remove('active');
+    priceAscBtn.classList.remove('active');
+    priceDescBtn.classList.remove('active');
+    authorAscBtn.classList.remove('active');
     let sortedBooks = sortByAuthorDesc(books);
     populateMainPage(sortedBooks);
   })

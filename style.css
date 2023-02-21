@@ -114,3 +114,9 @@ img{
 .close-modal{
   float: right;
 }
+
+
+.btn-outline-dark.active {
+  background-color:rgba(183, 143, 109, 0.823);
+  color: white;
+}
