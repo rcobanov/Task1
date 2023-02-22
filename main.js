@@ -1,6 +1,6 @@
 import './style.css'
 let cart = [];
-
+let cartCounter = 0;
 
 async function getJSON(url) {
   let rawData = await fetch(url);
@@ -18,57 +18,28 @@ function setupEventListeners(books) {
           addtoCart(book);
         });
       }
-    
-      document.querySelector('.categoryFilter').addEventListener('change', async event => {
-        const filterAuthor = document.getElementById('authorFilter')
-        const filterPrice = document.getElementById('priceFilter')
-        let selectedCategory = event.target.value;
+  
+      document.querySelector('.filterbar').addEventListener('change', async event => {
+        let selectedOption = event.target.options[event.target.selectedIndex]
+        let filterLabel= selectedOption.parentNode.label;
+        let selectedFilter = event.target.value;
+
         //new copy of book array to be able to filter more than once
         let newBooks = await getJSON('/bookdata.json');
-        if (selectedCategory === 'all') {
-          //get all books again
+        if (selectedFilter === 'all') {
           populateMainPage(newBooks);
-        } else {
-          let booksWithCategory = doFilterCategory(newBooks, selectedCategory)
+        } else if (filterLabel === 'Categories') {
+          let booksWithCategory = doFilterCategory(newBooks, selectedFilter)
+          populateMainPage(booksWithCategory);
+        } else if (filterLabel === 'Authors') {
+          let booksWithCategory = doFilterAuthor(newBooks, selectedFilter)
+          populateMainPage(booksWithCategory);
+        } else if (filterLabel === 'Price Interval') {
+          let booksWithCategory = doFilterPrice(newBooks, selectedFilter)
           populateMainPage(booksWithCategory);
         }
-        filterAuthor.selectedIndex = 0;
-        filterPrice.selectedIndex = 0;
       })
-    
-      document.querySelector('.authorFilter').addEventListener('change', async event => {
-        const filterCategory = document.getElementById('categoryFilter')
-        const filterPrice= document.getElementById('priceFilter')
-        let selectedCategory = event.target.value;
-        //new copy of book array to be able to filter more than once
-        let newBooks = await getJSON('/bookdata.json');
-        if (selectedCategory === 'all') {
-          let newBooks = await getJSON('/bookdata.json');
-          populateMainPage(newBooks);
-        } else {
-          let booksWithCategory = doFilterAuthor(newBooks, selectedCategory)
-          populateMainPage(booksWithCategory);
-        }
-        filterCategory.selectedIndex = 0;
-        filterPrice.selectedIndex = 0;
-        
-      })
-    
-      document.querySelector('.priceFilter').addEventListener('change', async event => {
-        const filterCategory = document.getElementById('categoryFilter')
-        const filterAuthor= document.getElementById('authorFilter')
-        let selectedCategory = event.target.value;
-        let newBooks = await getJSON('/bookdata.json');
-        if (selectedCategory === 'all') {
-          populateMainPage(newBooks);
-        } else {
-          let booksWithCategory = doFilterPrice(newBooks, selectedCategory)
-          populateMainPage(booksWithCategory);
-        }
-        filterCategory.selectedIndex = 0;
-        filterAuthor.selectedIndex = 0;
-      })
-    
+  
       //Handle sorts
       const titleAscBtn = document.querySelector('.sort-title-asc-btn');
       const titleDescBtn = document.querySelector('.sort-title-desc-btn');
@@ -148,7 +119,6 @@ function setupEventListeners(books) {
         let sortedBooks = sortByAuthorDesc(books);
         populateMainPage(sortedBooks);
       })
-
 }
 
 function deleteRowFromCart(row) {
@@ -162,7 +132,7 @@ function deleteRowFromCart(row) {
     })
   }
   //update cart counter
-  document.querySelector(".navbar-cart").innerHTML = `<i class="bi bi-cart">${cart.length}</i>`;
+  document.querySelector(".navbar-cart").innerHTML = `<i class="bi bi-cart">${--cartCounter}</i>`;
   
   //remove the modal and open it again
   modal.remove();
@@ -219,8 +189,6 @@ function openCartModal(cart) {
       modal.remove();
     });
   }
-
-
 
 function openModal(book) {
   let modalHtml = ''
@@ -281,8 +249,6 @@ function populateMainPage(books) {
       openModal(book);
     });
   }
-  setupEventListeners(books);
-
 }
 
 function showFilters(books) {
@@ -291,27 +257,22 @@ function showFilters(books) {
 
   let html = '';
   html += `<div class="col-sm-12">`
-  html += `<div class="col-sm-8"><i class="bi bi-filter"> Filters</i></div>`
+  html += `<div class="col-sm-8"><i class="bi bi-filter"></i></div>`
   html += `<div class="col-sm-11">` 
-  html += `<label class="col-sm-4"> Category:`;
-  html += `<select class="categoryFilter" id="categoryFilter">`;
+  html += `<label class="col-sm-4">Filters:`;
+  html += `<select class="filterbar" id="filterbar">`;
   html += `<option>all</option>`;
+  html += `<optgroup label ="Categories">`
   html += `${categories.map(category => `<option>${category}</option>`).join('')}`;
-  html += `</select>`;
-  html += `</label>`;
-  html += `<label class="col-sm-4"> Author:`;
-  html += `<select class="authorFilter" id="authorFilter">`;
-  html += `<option>all</option>`;
+  html += `<optgroup label ="Authors">`
   html += `${authors.map(author => `<option>${author}</option>`).join('')}`;
-  html += `</select>`;
-  html += `</label>`;
-  html += `<label class="col-sm-4">Price Interval:`;
-  html += `<select class="priceFilter" id="priceFilter">`;
-  html += `<option>all</option>`;
+  html += `</optgroup>`
+  html += `<optgroup label ="Price Interval">`
   html += `<option>0 - 100</option>`;
   html += `<option>100 - 200</option>`;
   html += `<option>200 - 300</option>`;
   html += `<option>300 - 400</option>`;
+  html += `</optgroup>`
   html += `</select>`;
   html += `</label>`;
   html += `</div>`;
@@ -323,15 +284,10 @@ function showFilters(books) {
   html += `<button class="btn btn-outline-dark sort-price-desc-btn"> Price Desc </button>`;
   html += `<button class="btn btn-outline-dark sort-author-asc-btn"> Author Asc </button>`;
   html += `<button class="btn btn-outline-dark sort-author-desc-btn"> Author Desc </button> `;
-  html += `</div>`
+  html += `</div>`;
   html += `</div>`;
 
   document.querySelector('.filters').innerHTML = html;
-
-
-  //event listeners
-
-
 }
 
 
@@ -449,7 +405,7 @@ function addtoCart(book) {
   } else { // else push it to cart array
     cart.push({ title: book.title, qty: 1, price: book.price })
   }
-  document.querySelector(".navbar-cart").innerHTML = `<i class="bi bi-cart">${cart.length}</i>`;
+  document.querySelector(".navbar-cart").innerHTML = `<i class="bi bi-cart">${++cartCounter}</i>`;
 }
 
 
@@ -461,6 +417,8 @@ async function start() {
   document.querySelector(".navbar-cart").addEventListener('click', event => {
     openCartModal(cart);
   })
+
+  setupEventListeners(books);
   
 }
 
