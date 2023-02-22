@@ -9,6 +9,145 @@ async function getJSON(url) {
   return data;
 }
 
+function setupEventListeners(books) {
+      // add event listener to each detail button
+      const cartButtons = document.querySelectorAll('.cart-btn');
+      for (let i = 0; i < cartButtons.length; i++) {
+        const book = books[i];
+        cartButtons[i].addEventListener('click', () => {
+          addtoCart(book);
+        });
+      }
+    
+      document.querySelector('.categoryFilter').addEventListener('change', async event => {
+        const filterAuthor = document.getElementById('authorFilter')
+        const filterPrice = document.getElementById('priceFilter')
+        let selectedCategory = event.target.value;
+        if (selectedCategory === 'all') {
+          //get all books again
+          let newBooks = await getJSON('/bookdata.json');
+          populateMainPage(newBooks);
+        } else {
+          let booksWithCategory = doFilterCategory(books, selectedCategory)
+          populateMainPage(booksWithCategory);
+        }
+        filterAuthor.selectedIndex = 0;
+        filterPrice.selectedIndex = 0;
+      })
+    
+      document.querySelector('.authorFilter').addEventListener('change', async event => {
+        const filterCategory = document.getElementById('categoryFilter')
+        const filterPrice= document.getElementById('priceFilter')
+        let selectedCategory = event.target.value;
+        if (selectedCategory === 'all') {
+          let newBooks = await getJSON('/bookdata.json');
+          populateMainPage(newBooks);
+        } else {
+          let booksWithCategory = doFilterAuthor(books, selectedCategory)
+          populateMainPage(booksWithCategory);
+        }
+        filterCategory.selectedIndex = 0;
+        filterPrice.selectedIndex = 0;
+        
+      })
+    
+      document.querySelector('.priceFilter').addEventListener('change', async event => {
+        const filterCategory = document.getElementById('categoryFilter')
+        const filterAuthor= document.getElementById('authorFilter')
+        let selectedCategory = event.target.value;
+        if (selectedCategory === 'all') {
+          let newBooks = await getJSON('/bookdata.json');
+          populateMainPage(newBooks);
+        } else {
+          let booksWithCategory = doFilterPrice(books, selectedCategory)
+          populateMainPage(booksWithCategory);
+        }
+        filterCategory.selectedIndex = 0;
+        filterAuthor.selectedIndex = 0;
+      })
+    
+      //Handle sorts
+      const titleAscBtn = document.querySelector('.sort-title-asc-btn');
+      const titleDescBtn = document.querySelector('.sort-title-desc-btn');
+      const priceAscBtn = document.querySelector('.sort-price-asc-btn');
+      const priceDescBtn = document.querySelector('.sort-price-desc-btn');
+      const authorAscBtn = document.querySelector('.sort-author-asc-btn');
+      const authorDescBtn = document.querySelector('.sort-author-desc-btn');
+    
+      document.querySelector('.sort-price-asc-btn').addEventListener('click', event => {
+        priceAscBtn.classList.add('active');
+        // remove active class from other buttons
+        titleDescBtn.classList.remove('active');
+        titleAscBtn.classList.remove('active');
+        priceDescBtn.classList.remove('active');
+        authorAscBtn.classList.remove('active');
+        authorDescBtn.classList.remove('active');
+        let sortedBooks = sortByPriceAsc(books);
+        populateMainPage(sortedBooks);
+      })
+    
+      document.querySelector('.sort-price-desc-btn').addEventListener('click', event => {
+        priceDescBtn.classList.add('active');
+        // remove active class from other buttons
+        titleDescBtn.classList.remove('active');
+        titleAscBtn.classList.remove('active');
+        priceAscBtn.classList.remove('active');
+        authorAscBtn.classList.remove('active');
+        authorDescBtn.classList.remove('active');
+        let sortedBooks = sortByPriceDesc(books);
+        populateMainPage(sortedBooks);
+      })
+    
+      document.querySelector('.sort-title-asc-btn').addEventListener('click', event => {
+        titleAscBtn.classList.add('active');
+        // remove active class from other buttons
+        titleDescBtn.classList.remove('active');
+        priceAscBtn.classList.remove('active');
+        priceDescBtn.classList.remove('active');
+        authorAscBtn.classList.remove('active');
+        authorDescBtn.classList.remove('active');
+        let sortedBooks = sortByTitleAsc(books);
+        populateMainPage(sortedBooks);
+      })
+      document.querySelector('.sort-title-desc-btn').addEventListener('click', event => {
+        titleDescBtn.classList.add('active');
+        // remove active class from other buttons
+        titleAscBtn.classList.remove('active');
+        priceAscBtn.classList.remove('active');
+        priceDescBtn.classList.remove('active');
+        authorAscBtn.classList.remove('active');
+        authorDescBtn.classList.remove('active');
+        let sortedBooks = sortByTitleDesc(books);
+        populateMainPage(sortedBooks);
+      })
+    
+      document.querySelector('.sort-author-asc-btn').addEventListener('click', event => {
+        authorAscBtn.classList.add('active');
+        // remove active class from other buttons
+        titleDescBtn.classList.remove('active');
+        titleAscBtn.classList.remove('active');
+        priceAscBtn.classList.remove('active');
+        priceDescBtn.classList.remove('active');
+        authorDescBtn.classList.remove('active');
+        let sortedBooks = sortByAuthorAsc(books);
+        populateMainPage(sortedBooks);
+      })
+    
+      document.querySelector('.sort-author-desc-btn').addEventListener('click', event => {
+        authorDescBtn.classList.add('active');
+        // remove active class from other buttons
+        titleDescBtn.classList.remove('active');
+        titleAscBtn.classList.remove('active')
+        priceAscBtn.classList.remove('active');
+        priceDescBtn.classList.remove('active');
+        authorAscBtn.classList.remove('active');
+    
+        let sortedBooks = sortByAuthorDesc(books);
+        populateMainPage(sortedBooks);
+      })
+
+}
+
 function deleteRowFromCart(row) {
   const modal = document.querySelector('.modal');
   //make changes to qty or remove modal
@@ -78,7 +217,6 @@ function openCartModal(cart) {
 
 
 function openModal(book) {
-  console.log('Im clicked ' + book.title);
   let modalHtml = ''
   modalHtml += `<div class="modal">`
   modalHtml += `<div class="modal-dialog modal-lg">`
@@ -140,15 +278,10 @@ function populateMainPage(books) {
     });
   }
 
-    // add event listener to each detail button
-    const cartButtons = document.querySelectorAll('.cart-btn');
-    for (let i = 0; i < cartButtons.length; i++) {
-      const book = books[i];
-      cartButtons[i].addEventListener('click', () => {
-        addtoCart(book);
-      });
-    }
-  
+  setupEventListeners(books);
+
+
+
 }
 
 function showFilters(books) {
@@ -197,131 +330,7 @@ function showFilters(books) {
 
   //event listeners
 
-  document.querySelector('.categoryFilter').addEventListener('change', async event => {
-    const filterAuthor = document.getElementById('authorFilter')
-    const filterPrice = document.getElementById('priceFilter')
-    console.log(event.target.value)
-    let selectedCategory = event.target.value;
-    if (selectedCategory === 'all') {
-      populateMainPage(books);
-    } else {
-      let booksWithCategory = doFilterCategory(books, selectedCategory)
-      populateMainPage(booksWithCategory);
-    }
-    filterAuthor.selectedIndex = 0;
-    filterPrice.selectedIndex = 0;
-  })
 
-  document.querySelector('.authorFilter').addEventListener('change', event => {
-    console.log(event.target.value)
-    const filterCategory = document.getElementById('categoryFilter')
-    const filterPrice= document.getElementById('priceFilter')
-    console.log(filterCategory)
-    let selectedCategory = event.target.value;
-    if (selectedCategory === 'all') {
-      populateMainPage(books);
-    } else {
-      let booksWithCategory = doFilterAuthor(books, selectedCategory)
-      populateMainPage(booksWithCategory);
-    }
-    filterCategory.selectedIndex = 0;
-    filterPrice.selectedIndex = 0;
-    
-  })
-
-  document.querySelector('.priceFilter').addEventListener('change', event => {
-    const filterCategory = document.getElementById('categoryFilter')
-    const filterAuthor= document.getElementById('authorFilter')
-    let selectedCategory = event.target.value;
-    if (selectedCategory === 'all') {
-      populateMainPage(books);
-    } else {
-      let booksWithCategory = doFilterPrice(books, selectedCategory)
-      populateMainPage(booksWithCategory);
-    }
-    filterCategory.selectedIndex = 0;
-    filterAuthor.selectedIndex = 0;
-  })
-
-  //Handle sorts
-  const titleAscBtn = document.querySelector('.sort-title-asc-btn');
-  const titleDescBtn = document.querySelector('.sort-title-desc-btn');
-  const priceAscBtn = document.querySelector('.sort-price-asc-btn');
-  const priceDescBtn = document.querySelector('.sort-price-desc-btn');
-  const authorAscBtn = document.querySelector('.sort-author-asc-btn');
-  const authorDescBtn = document.querySelector('.sort-author-desc-btn');
-
-  document.querySelector('.sort-price-asc-btn').addEventListener('click', event => {
-    priceAscBtn.classList.add('active');
-    // remove active class from other buttons
-    titleDescBtn.classList.remove('active');
-    titleAscBtn.classList.remove('active');
-    priceDescBtn.classList.remove('active');
-    authorAscBtn.classList.remove('active');
-    authorDescBtn.classList.remove('active');
-    let sortedBooks = sortByPriceAsc(books);
-    populateMainPage(sortedBooks);
-  })
-
-  document.querySelector('.sort-price-desc-btn').addEventListener('click', event => {
-    priceDescBtn.classList.add('active');
-    // remove active class from other buttons
-    titleDescBtn.classList.remove('active');
-    titleAscBtn.classList.remove('active');
-    priceAscBtn.classList.remove('active');
-    authorAscBtn.classList.remove('active');
-    authorDescBtn.classList.remove('active');
-    let sortedBooks = sortByPriceDesc(books);
-    populateMainPage(sortedBooks);
-  })
-
-  document.querySelector('.sort-title-asc-btn').addEventListener('click', event => {
-    titleAscBtn.classList.add('active');
-    // remove active class from other buttons
-    titleDescBtn.classList.remove('active');
-    priceAscBtn.classList.remove('active');
-    priceDescBtn.classList.remove('active');
-    authorAscBtn.classList.remove('active');
-    authorDescBtn.classList.remove('active');
-    let sortedBooks = sortByTitleAsc(books);
-    populateMainPage(sortedBooks);
-  })
-  document.querySelector('.sort-title-desc-btn').addEventListener('click', event => {
-    titleDescBtn.classList.add('active');
-    // remove active class from other buttons
-    titleAscBtn.classList.remove('active');
-    priceAscBtn.classList.remove('active');
-    priceDescBtn.classList.remove('active');
-    authorAscBtn.classList.remove('active');
-    authorDescBtn.classList.remove('active');
-    let sortedBooks = sortByTitleDesc(books);
-    populateMainPage(sortedBooks);
-  })
-
-  document.querySelector('.sort-author-asc-btn').addEventListener('click', event => {
-    authorAscBtn.classList.add('active');
-    // remove active class from other buttons
-    titleDescBtn.classList.remove('active');
-    titleAscBtn.classList.remove('active');
-    priceAscBtn.classList.remove('active');
-    priceDescBtn.classList.remove('active');
-    authorDescBtn.classList.remove('active');
-    let sortedBooks = sortByAuthorAsc(books);
-    populateMainPage(sortedBooks);
-  })
-
-  document.querySelector('.sort-author-desc-btn').addEventListener('click', event => {
-    authorDescBtn.classList.add('active');
-    // remove active class from other buttons
-    titleDescBtn.classList.remove('active');
-    titleAscBtn.classList.remove('active')
-    priceAscBtn.classList.remove('active');
-    priceDescBtn.classList.remove('active');
-    authorAscBtn.classList.remove('active');
-
-    let sortedBooks = sortByAuthorDesc(books);
-    populateMainPage(sortedBooks);
-  })
 }
 
 
@@ -351,10 +360,8 @@ function doFilterCategory(books, filter) {
 
 function doFilterAuthor(books, filter) {
   let newBooks = books.filter((book) => {
-    console.log(book.author === filter)
     return book.author === filter;
   })  
-  console.log(newBooks);
   return newBooks;
 }
 
@@ -447,11 +454,9 @@ function addtoCart(book) {
 async function start() {
   let books = await getJSON('/bookdata.json');
   showFilters(books);
-  //showSort(books);
   populateMainPage(books);
 
   document.querySelector(".navbar-cart").addEventListener('click', event => {
-    console.log(cart)
     openCartModal(cart);
   })
   
