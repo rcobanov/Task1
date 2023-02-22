@@ -113,9 +113,9 @@ function openModal(book) {
 function populateMainPage(books) {
   let html = '';
 
-  html += '<div class="row justify-content-center">'
+  html += '<div class="row">'
   for (let book of books) {
-    html += '<div class="col-sm-2">';
+    html += '<div class="col-sm-3" id="tablerow">';
     html += '<img src="./images/dummy.jpg" >';
     html += `<div> Price: ${book.price}$ </div>`;
     html += `<div class="booktitle"> ${book.title} </div>`;
@@ -157,7 +157,7 @@ function showFilters(books) {
 
   let html = '';
   html += `<div class="col-sm-12">`
-  html += `<div class="col-sm-8"><a>Filters:</a></div>`
+  html += `<div class="col-sm-8"><i class="bi bi-filter"> Filters</i></div>`
   html += `<div class="col-sm-11">` 
   html += `<label class="col-sm-4"> Category:`;
   html += `<select class="categoryFilter" id="categoryFilter">`;
@@ -197,7 +197,7 @@ function showFilters(books) {
 
   //event listeners
 
-  document.querySelector('.categoryFilter').addEventListener('change', event => {
+  document.querySelector('.categoryFilter').addEventListener('change', async event => {
     const filterAuthor = document.getElementById('authorFilter')
     const filterPrice = document.getElementById('priceFilter')
     console.log(event.target.value)
@@ -271,7 +271,6 @@ function showFilters(books) {
     priceAscBtn.classList.remove('active');
     authorAscBtn.classList.remove('active');
     authorDescBtn.classList.remove('active');
-    console.log(event);
     let sortedBooks = sortByPriceDesc(books);
     populateMainPage(sortedBooks);
   })
@@ -315,10 +314,11 @@ function showFilters(books) {
     authorDescBtn.classList.add('active');
     // remove active class from other buttons
     titleDescBtn.classList.remove('active');
-    titleAscBtn.classList.remove('active');
+    titleAscBtn.classList.remove('active')
     priceAscBtn.classList.remove('active');
     priceDescBtn.classList.remove('active');
     authorAscBtn.classList.remove('active');
+
     let sortedBooks = sortByAuthorDesc(books);
     populateMainPage(sortedBooks);
   })
