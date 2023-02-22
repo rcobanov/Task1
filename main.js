@@ -23,12 +23,13 @@ function setupEventListeners(books) {
         const filterAuthor = document.getElementById('authorFilter')
         const filterPrice = document.getElementById('priceFilter')
         let selectedCategory = event.target.value;
+        //new copy of book array to be able to filter more than once
+        let newBooks = await getJSON('/bookdata.json');
         if (selectedCategory === 'all') {
           //get all books again
-          let newBooks = await getJSON('/bookdata.json');
           populateMainPage(newBooks);
         } else {
-          let booksWithCategory = doFilterCategory(books, selectedCategory)
+          let booksWithCategory = doFilterCategory(newBooks, selectedCategory)
           populateMainPage(booksWithCategory);
         }
         filterAuthor.selectedIndex = 0;
@@ -39,11 +40,13 @@ function setupEventListeners(books) {
         const filterCategory = document.getElementById('categoryFilter')
         const filterPrice= document.getElementById('priceFilter')
         let selectedCategory = event.target.value;
+        //new copy of book array to be able to filter more than once
+        let newBooks = await getJSON('/bookdata.json');
         if (selectedCategory === 'all') {
           let newBooks = await getJSON('/bookdata.json');
           populateMainPage(newBooks);
         } else {
-          let booksWithCategory = doFilterAuthor(books, selectedCategory)
+          let booksWithCategory = doFilterAuthor(newBooks, selectedCategory)
           populateMainPage(booksWithCategory);
         }
         filterCategory.selectedIndex = 0;
@@ -55,11 +58,11 @@ function setupEventListeners(books) {
         const filterCategory = document.getElementById('categoryFilter')
         const filterAuthor= document.getElementById('authorFilter')
         let selectedCategory = event.target.value;
+        let newBooks = await getJSON('/bookdata.json');
         if (selectedCategory === 'all') {
-          let newBooks = await getJSON('/bookdata.json');
           populateMainPage(newBooks);
         } else {
-          let booksWithCategory = doFilterPrice(books, selectedCategory)
+          let booksWithCategory = doFilterPrice(newBooks, selectedCategory)
           populateMainPage(booksWithCategory);
         }
         filterCategory.selectedIndex = 0;
@@ -158,6 +161,9 @@ function deleteRowFromCart(row) {
       return data.title !== row.title;
     })
   }
+  //update cart counter
+  document.querySelector(".navbar-cart").innerHTML = `<i class="bi bi-cart">${cart.length}</i>`;
+  
   //remove the modal and open it again
   modal.remove();
   openCartModal(cart);
@@ -250,7 +256,6 @@ function openModal(book) {
 
 function populateMainPage(books) {
   let html = '';
-
   html += '<div class="row">'
   for (let book of books) {
     html += '<div class="col-sm-3" id="tablerow">';
@@ -268,7 +273,6 @@ function populateMainPage(books) {
   html += '</div>';
   document.querySelector('.books').innerHTML = html;
 
-
   // add event listener to each detail button
   const detailsButtons = document.querySelectorAll('.details-btn');
   for (let i = 0; i < detailsButtons.length; i++) {
@@ -277,10 +281,7 @@ function populateMainPage(books) {
       openModal(book);
     });
   }
-
   setupEventListeners(books);
-
-
 
 }
 
@@ -448,6 +449,7 @@ function addtoCart(book) {
   } else { // else push it to cart array
     cart.push({ title: book.title, qty: 1, price: book.price })
   }
+  document.querySelector(".navbar-cart").innerHTML = `<i class="bi bi-cart">${cart.length}</i>`;
 }
 
 
