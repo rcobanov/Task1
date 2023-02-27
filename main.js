@@ -172,13 +172,13 @@ function populateMainPage() {
   }else if (selectedSortOption === 'Title Desc') {
     sortByTitle('desc')
   } else if (selectedSortOption === 'Price Asc') {
-    sortByPriceAsc()
+    sortByPrice('asc')
   } else if (selectedSortOption === 'Price Desc') {
-    sortByPriceDesc()
+    sortByPrice('desc')
   }  else if (selectedSortOption === 'Author Asc') {
-    sortByAuthorAsc();
+    sortByAuthor('asc');
   } else if (selectedSortOption === 'Author Desc') {
-    sortByAuthorDesc();
+    sortByAuthor('desc');
   }
 
 
@@ -287,12 +287,11 @@ function doFilterPrice(filter) {
   })  
 }
 
-function sortByPriceAsc() {
-  filteredBooks = filteredBooks.sort((a, b) => a.price - b.price);
+function sortByPrice(order) {
+  if (order === 'asc') {filteredBooks = filteredBooks.sort((a, b) => a.price - b.price)}
+  if (order === 'desc'){filteredBooks = filteredBooks.sort((a, b) =>  b.price - a.price)}
 }
-function sortByPriceDesc() {
-  filteredBooks = filteredBooks.sort((a, b) =>  b.price - a.price);
-}
+
 
 function sortById() {
   filteredBooks = filteredBooks.sort((a, b) => a.id - b.id);
@@ -325,29 +324,29 @@ function sortByTitle(order) {
 }
 
 
+function sortByAuthor(order) {
+  if (order === 'asc') {
+    filteredBooks.sort((a, b) => {
+      if (a.author < b.author) {
+        return -1;
+      }
+      if (a.author > b.author) {
+        return 1;
+      }
+      return 0;
+    });
+  } else if (order === 'desc') {
+    filteredBooks.sort((a, b) => {
+      if (a.author> b.author) {
+        return -1;
+      }
+      if (a.author < b.author) {
+        return 1;
+      }
+      return 0;
+    });
+  }
 
-function sortByAuthorAsc() {
-  filteredBooks.sort((a, b) => {
-    if (a.author < b.author) {
-      return -1;
-    }
-    if (a.author > b.author) {
-      return 1;
-    }
-    return 0;
-  });
-}
-
-function sortByAuthorDesc() {
-  filteredBooks.sort((a, b) => {
-    if (a.author> b.author) {
-      return -1;
-    }
-    if (a.author < b.author) {
-      return 1;
-    }
-    return 0;
-  });
 }
 
 
