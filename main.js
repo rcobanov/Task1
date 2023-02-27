@@ -84,14 +84,14 @@ function openCartModal(cart) {
   modalHtml += `<th>Item</th>
                 <th>Row Total</th>
                 <th></th>`
-  modalHtml += `${cart.map(book => `<tr style="font-size: 12px;">
-               <td style="text-align: left;"><ul><li  style="font-weight: 700;">${book.title}</li><li>Price: ${book.price}.00$</li><li>Quantity: ${book.qty}</li></ul></td>
+  modalHtml += `${cart.map(book => `<tr style="font-size: 12px;"> 
+               <td><ul><li  style="font-weight: 700;">${book.title}</li><li>Price: ${book.price}.00$</li><li>Quantity: ${book.qty}</li></ul></td>
                <td>${book.price * book.qty}.00$</td>
                <td><button class="btn btn-outline-dark w-10 bi bi-trash modal-delete-btn"></button></td>
                </tr>
                </option>`).join('')}`;
   modalHtml += `<tr>
-                <td><td>
+                <td><button type="button" class="btn btn-primary">Checkout</button><td>
                 <td>Total: ${totalPrice}.00$</td>
                 <td></td>
                 </tr>`
@@ -180,9 +180,9 @@ function populateMainPage() {
   let html = '';
   html += '<div class="row">'
   for (let book of filteredBooks) {
-    html += '<div class="col-sm-3" id="tablerow">';
+    html += '<div class="col-sm-4 col-lg-3 cardview" id="tablerow">';
     html += '<img src="./images/dummy.jpg" >';
-    html += `<div> Price: ${book.price}$ </div>`;
+    html += `<div class="bookprice"> Price: ${book.price}$ </div>`;
     html += `<div class="booktitle"> ${book.title} </div>`;
     html += `<div class="author"> ${book.author} </div>`;
     html += `<div class="category"> ${book.category} </div>`;

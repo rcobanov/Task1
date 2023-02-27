@@ -5,6 +5,7 @@
 }
 
 body{
+  overflow:hidden;
   padding-top:100px;
   background-color: rgba(124, 91, 41, 0.249)
 }
@@ -28,7 +29,7 @@ main{
 }
 
 
-.col-sm-3{
+.cardview{
   background-color: white;
   padding: 20px;
   margin: 10px;
@@ -78,6 +79,11 @@ img{
 }
 
 .author{
+  font-weight:200;
+  font-size: 0.8em;
+}
+
+.bookprice{
   font-weight:200;
   font-size: 0.8em;
 }
