@@ -2,6 +2,9 @@ import './style.css'
 let cart = [];
 let cartCounter = 0;
 let filteredBooks = [];
+let selectedSortOption = '';
+let selectedFilterOption = '';
+let selectedFilterLabel = '';
 
 async function getJSON(url) {
   let rawData = await fetch(url);
@@ -32,51 +35,20 @@ function setupEventListenersCards() {
 }
 
 function setupEventListenersFilter() {
-    document.querySelector('.filterbar').addEventListener('change', async event => {
+  document.querySelector('.filterbar').addEventListener('change', async event => {
     let selectedOption = event.target.options[event.target.selectedIndex]
     let filterLabel= selectedOption.parentNode.label;
-    let selectedFilter = event.target.value;
-      //new copy of book array to be able to filter more than once
-      filteredBooks = await getJSON('/bookdata.json');
-      if (selectedFilter === 'all') {
-        populateMainPage();
-      } else if (filterLabel === 'Categories') {
-        doFilterCategory(selectedFilter)
-        populateMainPage();
-      } else if (filterLabel === 'Authors') {
-        doFilterAuthor(newBooks, selectedFilter)
-        populateMainPage();
-      } else if (filterLabel === 'Price Interval') {
-        doFilterPrice(newBooks, selectedFilter)
-        populateMainPage();
-      }
-    })
+    //new copy of book array to be able to filter more than once
+    filteredBooks = await getJSON('/bookdata.json');
+
+    selectedFilterOption = event.target.value;
+    selectedFilterLabel = filterLabel;
+    populateMainPage();
+  })
   
     document.querySelector('.sortbar').addEventListener('change', async event => {
-      let selectedOption = event.target.value
-        //new copy of book array to be able to filter more than once
-      console.log("Selected option " + selectedOption)
-        if (selectedOption === 'Recommended') {
-          populateMainPage();
-        } else if (selectedOption === 'Title Asc') {
-          sortByTitle('asc')
-          populateMainPage();
-        }else if (selectedOption === 'Title Desc') {
-          sortByTitle('desc')
-          populateMainPage();
-        } else if (selectedOption === 'Price Asc') {
-          sortByPriceAsc()
-          populateMainPage();
-        } else if (selectedOption === 'Price Desc') {
-          sortByPriceDesc()
-          populateMainPage();
-        }  else if (selectedOption === 'Author Asc') {
-          sortByAuthorAsc();
-          populateMainPage();
-        } else if (selectedOption === 'Author Desc') {
-          sortByPriceDesc();
-          populateMainPage();
-        }
+      selectedSortOption = event.target.value;
+      populateMainPage();
       })
   
 }
@@ -183,6 +155,33 @@ function openModal(book) {
 }
 
 function populateMainPage() {
+
+      
+  if (selectedFilterLabel === 'Categories') {
+    doFilterCategory(selectedFilterOption)
+  } else if (selectedFilterLabel === 'Authors') {
+    doFilterAuthor(selectedFilterOption)
+  } else if (selectedFilterLabel === 'Price Interval') {
+    doFilterPrice(selectedFilterOption)
+  }
+
+  if (selectedSortOption === 'Recommended') {
+    sortById();
+  } else if (selectedSortOption === 'Title Asc') {
+    sortByTitle('asc')
+  }else if (selectedSortOption === 'Title Desc') {
+    sortByTitle('desc')
+  } else if (selectedSortOption === 'Price Asc') {
+    sortByPriceAsc()
+  } else if (selectedSortOption === 'Price Desc') {
+    sortByPriceDesc()
+  }  else if (selectedSortOption === 'Author Asc') {
+    sortByAuthorAsc();
+  } else if (selectedSortOption === 'Author Desc') {
+    sortByAuthorDesc();
+  }
+
+
   let html = '';
   html += '<div class="row">'
   for (let book of filteredBooks) {
@@ -268,19 +267,18 @@ function getAuthors(books) {
 
 function doFilterCategory(filter) {
   filteredBooks = filteredBooks.filter((book) => {
-    console.log(filter + " inDOfilter " + filteredBooks)
     return book.category === filter;
   }) 
 
 }
 
 function doFilterAuthor(filter) {
-  filteredBooks = books.filter((book) => {
+  filteredBooks = filteredBooks.filter((book) => {
     return book.author === filter;
   }) 
 }
 
-function doFilterPrice( filter) {
+function doFilterPrice(filter) {
   const parts = filter.split('-');
   let lower = parts[0].trim();
   let upper = parts[1].trim();
@@ -294,6 +292,10 @@ function sortByPriceAsc() {
 }
 function sortByPriceDesc() {
   filteredBooks = filteredBooks.sort((a, b) =>  b.price - a.price);
+}
+
+function sortById() {
+  filteredBooks = filteredBooks.sort((a, b) => a.id - b.id);
 }
 
 
