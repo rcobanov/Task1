@@ -143,3 +143,11 @@ img{
   background-color:rgba(183, 143, 109, 0.823);
   color: white;
 }
+
+ul{
+  list-style: none;
+}
+
+img.cart{
+  max-width: 10%;
+}

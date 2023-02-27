@@ -81,22 +81,17 @@ function openCartModal(cart) {
   modalHtml += `<button type="button" class="btn-close float-end close-modal" aria-label="Close"></button>`
   modalHtml += `<p>Cart</p>`
   modalHtml += '<table id="table" class="table table-striped" style ="margin: 0px auto;">'
-  modalHtml += `<th>Title</th>
-                <th>Price</th>
-                <th>Quantity</th>
+  modalHtml += `<th>Item</th>
                 <th>Row Total</th>
                 <th></th>`
-  modalHtml += `${cart.map(book => `<tr>
-               <td>${book.title}</td>
-               <td>${book.price}.00$</td>
-               <td>${book.qty}</td>
+  modalHtml += `${cart.map(book => `<tr style="font-size: 12px;">
+               <td style="text-align: left;"><ul><li  style="font-weight: 700;">${book.title}</li><li>Price: ${book.price}.00$</li><li>Quantity: ${book.qty}</li></ul></td>
                <td>${book.price * book.qty}.00$</td>
                <td><button class="btn btn-outline-dark w-10 bi bi-trash modal-delete-btn"></button></td>
                </tr>
                </option>`).join('')}`;
   modalHtml += `<tr>
                 <td><td>
-                <td></td>
                 <td>Total: ${totalPrice}.00$</td>
                 <td></td>
                 </tr>`
@@ -212,7 +207,7 @@ function showFilters(books) {
   html += `<div class="col-sm-12">`
   html += `<div class="col-sm-8"><i class="bi bi-filter"></i></div>`
   html += `<div class="col-sm-11">` 
-  html += `<label class="col-sm-4">Filters:`;
+  html += `<label class="col-sm-4">Filters: `;
   html += `<select class="filterbar" id="filterbar">`;
   html += `<option>all</option>`;
   html += `<optgroup label ="Categories">`
@@ -228,7 +223,7 @@ function showFilters(books) {
   html += `</optgroup>`
   html += `</select>`;
   html += `</label>`;
-  html += `<label class="col-sm-4">Sorts:`;
+  html += `<label class="col-sm-4">Sorts: `;
   html += `<select class="sortbar" id="sortbar">`;
   html += `<option>Recommended</option>`;
   html += `<option>Title Asc</option>`;
