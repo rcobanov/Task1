@@ -1,6 +1,7 @@
 import './style.css'
 let cart = [];
 let cartCounter = 0;
+let filteredBooks = [];
 
 async function getJSON(url) {
   let rawData = await fetch(url);
@@ -9,11 +10,11 @@ async function getJSON(url) {
   return data;
 }
 
-function setupEventListenersCards(books) {
+function setupEventListenersCards() {
   // add event listener to each detail button
   const detailsButtons = document.querySelectorAll('.details-btn');
   for (let i = 0; i < detailsButtons.length; i++) {
-    const book = books[i];
+    const book = filteredBooks[i];
     detailsButtons[i].addEventListener('click', () => {
       openModal(book);
     });
@@ -22,118 +23,62 @@ function setupEventListenersCards(books) {
   // add event listener to each detail button
   const cartButtons = document.querySelectorAll('.cart-btn');
   for (let i = 0; i < cartButtons.length; i++) {
-    const book = books[i];
+    const book = filteredBooks[i];
     cartButtons[i].addEventListener('click', () => {
-      console.log("Kolla fan")
       addtoCart(book);
     });
   }
 
 }
 
-function setupEventListenersFilter(books){
+function setupEventListenersFilter() {
     document.querySelector('.filterbar').addEventListener('change', async event => {
     let selectedOption = event.target.options[event.target.selectedIndex]
-    console.log('yes')
     let filterLabel= selectedOption.parentNode.label;
     let selectedFilter = event.target.value;
       //new copy of book array to be able to filter more than once
-      let newBooks = await getJSON('/bookdata.json');
+      filteredBooks = await getJSON('/bookdata.json');
       if (selectedFilter === 'all') {
-        
-        populateMainPage(newBooks);
+        populateMainPage();
       } else if (filterLabel === 'Categories') {
-        let booksWithCategory = doFilterCategory(newBooks, selectedFilter)
-        populateMainPage(booksWithCategory);
+        doFilterCategory(selectedFilter)
+        populateMainPage();
       } else if (filterLabel === 'Authors') {
-        let booksWithCategory = doFilterAuthor(newBooks, selectedFilter)
-        populateMainPage(booksWithCategory);
+        doFilterAuthor(newBooks, selectedFilter)
+        populateMainPage();
       } else if (filterLabel === 'Price Interval') {
-        let booksWithCategory = doFilterPrice(newBooks, selectedFilter)
-        populateMainPage(booksWithCategory);
+        doFilterPrice(newBooks, selectedFilter)
+        populateMainPage();
       }
     })
   
-    //Handle sorts
-    const titleAscBtn = document.querySelector('.sort-title-asc-btn');
-    const titleDescBtn = document.querySelector('.sort-title-desc-btn');
-    const priceAscBtn = document.querySelector('.sort-price-asc-btn');
-    const priceDescBtn = document.querySelector('.sort-price-desc-btn');
-    const authorAscBtn = document.querySelector('.sort-author-asc-btn');
-    const authorDescBtn = document.querySelector('.sort-author-desc-btn');
-    
-  document.querySelector('.sort-price-asc-btn').addEventListener('click', event => {
-      console.log("Sortera då")
-      priceAscBtn.classList.add('active');
-      // remove active class from other buttons
-      titleDescBtn.classList.remove('active');
-      titleAscBtn.classList.remove('active');
-      priceDescBtn.classList.remove('active');
-      authorAscBtn.classList.remove('active');
-      authorDescBtn.classList.remove('active');
-      let sortedBooks = sortByPriceAsc(books);
-      populateMainPage(sortedBooks);
-    })
-    
-    document.querySelector('.sort-price-desc-btn').addEventListener('click', event => {
-      priceDescBtn.classList.add('active');
-      // remove active class from other buttons
-      titleDescBtn.classList.remove('active');
-      titleAscBtn.classList.remove('active');
-      priceAscBtn.classList.remove('active');
-      authorAscBtn.classList.remove('active');
-      authorDescBtn.classList.remove('active');
-      let sortedBooks = sortByPriceDesc(books);
-      populateMainPage(sortedBooks);
-    })
-    
-    document.querySelector('.sort-title-asc-btn').addEventListener('click', event => {
-      titleAscBtn.classList.add('active');
-      // remove active class from other buttons
-      titleDescBtn.classList.remove('active');
-      priceAscBtn.classList.remove('active');
-      priceDescBtn.classList.remove('active');
-      authorAscBtn.classList.remove('active');
-      authorDescBtn.classList.remove('active');
-      let sortedBooks = sortByTitleAsc(books);
-      populateMainPage(sortedBooks);
-    })
-    document.querySelector('.sort-title-desc-btn').addEventListener('click', event => {
-      titleDescBtn.classList.add('active');
-      // remove active class from other buttons
-      titleAscBtn.classList.remove('active');
-      priceAscBtn.classList.remove('active');
-      priceDescBtn.classList.remove('active');
-      authorAscBtn.classList.remove('active');
-      authorDescBtn.classList.remove('active');
-      let sortedBooks = sortByTitleDesc(books);
-      populateMainPage(sortedBooks);
-    })
-    
-    document.querySelector('.sort-author-asc-btn').addEventListener('click', event => {
-      authorAscBtn.classList.add('active');
-      // remove active class from other buttons
-      titleDescBtn.classList.remove('active');
-      titleAscBtn.classList.remove('active');
-      priceAscBtn.classList.remove('active');
-      priceDescBtn.classList.remove('active');
-      authorDescBtn.classList.remove('active');
-      let sortedBooks = sortByAuthorAsc(books);
-      populateMainPage(sortedBooks);
-    })
-    
-    document.querySelector('.sort-author-desc-btn').addEventListener('click', event => {
-      authorDescBtn.classList.add('active');
-      // remove active class from other buttons
-      titleDescBtn.classList.remove('active');
-      titleAscBtn.classList.remove('active')
-      priceAscBtn.classList.remove('active');
-      priceDescBtn.classList.remove('active');
-      authorAscBtn.classList.remove('active');
+    document.querySelector('.sortbar').addEventListener('change', async event => {
+      let selectedOption = event.target.value
+        //new copy of book array to be able to filter more than once
+      console.log("Selected option " + selectedOption)
+        if (selectedOption === 'Recommended') {
+          populateMainPage();
+        } else if (selectedOption === 'Title Asc') {
+          sortByTitle('asc')
+          populateMainPage();
+        }else if (selectedOption === 'Title Desc') {
+          sortByTitle('desc')
+          populateMainPage();
+        } else if (selectedOption === 'Price Asc') {
+          sortByPriceAsc()
+          populateMainPage();
+        } else if (selectedOption === 'Price Desc') {
+          sortByPriceDesc()
+          populateMainPage();
+        }  else if (selectedOption === 'Author Asc') {
+          sortByAuthorAsc();
+          populateMainPage();
+        } else if (selectedOption === 'Author Desc') {
+          sortByPriceDesc();
+          populateMainPage();
+        }
+      })
   
-      let sortedBooks = sortByAuthorDesc(books);
-      populateMainPage(sortedBooks);
-    })
 }
 
 function deleteRowFromCart(row) {
@@ -237,10 +182,10 @@ function openModal(book) {
   })
 }
 
-function populateMainPage(books) {
+function populateMainPage() {
   let html = '';
   html += '<div class="row">'
-  for (let book of books) {
+  for (let book of filteredBooks) {
     html += '<div class="col-sm-3" id="tablerow">';
     html += '<img src="./images/dummy.jpg" >';
     html += `<div> Price: ${book.price}$ </div>`;
@@ -256,8 +201,7 @@ function populateMainPage(books) {
   html += '</div>';
   document.querySelector('.books').innerHTML = html;
 
-  setupEventListenersCards(books);
-  setupEventListenersFilter(books)
+  setupEventListenersCards();
 
 }
 
@@ -285,7 +229,19 @@ function showFilters(books) {
   html += `</optgroup>`
   html += `</select>`;
   html += `</label>`;
+  html += `<label class="col-sm-4">Sorts:`;
+  html += `<select class="sortbar" id="sortbar">`;
+  html += `<option>Recommended</option>`;
+  html += `<option>Title Asc</option>`;
+  html += `<option>Title Desc</option>`;
+  html += `<option>Price Asc</option>`;
+  html += `<option>Price Desc</option>`;
+  html += `<option>Author Asc</option>`;
+  html += `<option>Author Desc</option>`;
+  html += `</select>`;
+  html += `</label>`;
   html += `</div>`;
+  /*
   html += `<div class="col-sm-11">` 
   html += `<a>Sorts:</a>`
   html += `<button class="btn btn-outline-dark sort-title-asc-btn"> Title Asc </button>`;
@@ -294,10 +250,12 @@ function showFilters(books) {
   html += `<button class="btn btn-outline-dark sort-price-desc-btn"> Price Desc </button>`;
   html += `<button class="btn btn-outline-dark sort-author-asc-btn"> Author Asc </button>`;
   html += `<button class="btn btn-outline-dark sort-author-desc-btn"> Author Desc </button> `;
-  html += `</div>`;
+  html += `</div>`;*/
   html += `</div>`;
 
   document.querySelector('.filters').innerHTML = html;
+
+  setupEventListenersFilter()
 }
 
 
@@ -318,66 +276,66 @@ function getAuthors(books) {
   return [... new Set(withDuplicates)];
 }
 
-function doFilterCategory(books, filter) {
-  let newBooks = books.filter((book) => {
+function doFilterCategory(filter) {
+  filteredBooks = filteredBooks.filter((book) => {
+    console.log(filter + " inDOfilter " + filteredBooks)
     return book.category === filter;
-  })  
-  return newBooks;
+  }) 
+
 }
 
-function doFilterAuthor(books, filter) {
-  let newBooks = books.filter((book) => {
+function doFilterAuthor(filter) {
+  filteredBooks = books.filter((book) => {
     return book.author === filter;
-  })  
-  return newBooks;
+  }) 
 }
 
-function doFilterPrice(books, filter) {
+function doFilterPrice( filter) {
   const parts = filter.split('-');
   let lower = parts[0].trim();
   let upper = parts[1].trim();
-  let newBooks = books.filter((book) => {
+  filteredBooks = filteredBooks.filter((book) => {
     return book.price >= lower && book.price <= upper;
   })  
-
-  return newBooks;
 }
 
-function sortByPriceAsc(books) {
-  return books.sort((a, b) => a.price - b.price);
+function sortByPriceAsc() {
+  filteredBooks = filteredBooks.sort((a, b) => a.price - b.price);
 }
-function sortByPriceDesc(books) {
-  return books.sort((a, b) =>  b.price - a.price);
-}
-
-function sortByTitleAsc(books, sortBy) {
-  const sortedArr = books.sort((a, b) => {
-    if (a.title < b.title) {
-      return -1;
-    }
-    if (a.title > b.title) {
-      return 1;
-    }
-    return 0;
-  });
-  return sortedArr;
+function sortByPriceDesc() {
+  filteredBooks = filteredBooks.sort((a, b) =>  b.price - a.price);
 }
 
-function sortByTitleDesc(books, sortBy) {
-  const sortedArr = books.sort((a, b) => {
-    if (a.title > b.title) {
-      return -1;
-    }
-    if (a.title < b.title) {
-      return 1;
-    }
-    return 0;
-  });
-  return sortedArr;
+
+
+function sortByTitle(order) {
+  if (order === 'asc') {
+    filteredBooks.sort((a, b) => {
+      if (a.title < b.title) {
+        return -1;
+      }
+      if (a.title > b.title) {
+        return 1;
+      }
+      return 0;
+    });
+  } else if (order === 'desc') {
+    filteredBooks.sort((a, b) => {
+      if (a.title > b.title) {
+        return -1;
+      }
+      if (a.title < b.title) {
+        return 1;
+      }
+      return 0;
+    });
+  }
 }
 
-function sortByAuthorAsc(books, sortBy) {
-  const sortedArr = books.sort((a, b) => {
+
+
+function sortByAuthorAsc() {
+  filteredBooks.sort((a, b) => {
     if (a.author < b.author) {
       return -1;
     }
@@ -386,11 +344,10 @@ function sortByAuthorAsc(books, sortBy) {
     }
     return 0;
   });
-  return sortedArr;
 }
 
-function sortByAuthorDesc(books, sortBy) {
-  const sortedArr = books.sort((a, b) => {
+function sortByAuthorDesc() {
+  filteredBooks.sort((a, b) => {
     if (a.author> b.author) {
       return -1;
     }
@@ -399,7 +356,6 @@ function sortByAuthorDesc(books, sortBy) {
     }
     return 0;
   });
-  return sortedArr;
 }
 
 
@@ -421,12 +377,13 @@ function addtoCart(book) {
 
 async function start() {
   let books = await getJSON('/bookdata.json');
+  filteredBooks = books;
   showFilters(books);
+
   document.querySelector(".navbar-cart").addEventListener('click', event => {
-    console.log("kolla lixom")
     openCartModal(cart);
   });
-  populateMainPage(books);
+  populateMainPage();
 }
 
 start();
