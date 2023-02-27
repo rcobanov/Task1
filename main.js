@@ -241,16 +241,6 @@ function showFilters(books) {
   html += `</select>`;
   html += `</label>`;
   html += `</div>`;
-  /*
-  html += `<div class="col-sm-11">` 
-  html += `<a>Sorts:</a>`
-  html += `<button class="btn btn-outline-dark sort-title-asc-btn"> Title Asc </button>`;
-  html += `<button class="btn btn-outline-dark sort-title-desc-btn"> Title Desc</button>`;
-  html += `<button class="btn btn-outline-dark sort-price-asc-btn"> Price Asc </button>`;
-  html += `<button class="btn btn-outline-dark sort-price-desc-btn"> Price Desc </button>`;
-  html += `<button class="btn btn-outline-dark sort-author-asc-btn"> Author Asc </button>`;
-  html += `<button class="btn btn-outline-dark sort-author-desc-btn"> Author Desc </button> `;
-  html += `</div>`;*/
   html += `</div>`;
 
   document.querySelector('.filters').innerHTML = html;
