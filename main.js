@@ -1,5 +1,7 @@
 import './style.css'
 let cart = [];
+let sortingOptions = ['Recommended', 'Title Asc', 'Title Desc', 'Price Asc', 'Price Desc', 'Author Asc', 'Author Desc']
+let priceIntervals = ['0-100','100-200','200-300','300-400', '400-500']
 let cartCounter = 0;
 let filteredBooks = [];
 let selectedSortOption = '';
@@ -150,7 +152,6 @@ function openModal(book) {
 }
 
 function populateMainPage() {
-
       
   if (selectedFilterLabel === 'Categories') {
     doFilterCategory(selectedFilterOption)
@@ -175,7 +176,6 @@ function populateMainPage() {
   } else if (selectedSortOption === 'Author Desc') {
     sortByAuthor('desc');
   }
-
 
   let html = '';
   html += '<div class="row">'
@@ -216,22 +216,13 @@ function showFilters(books) {
   html += `${authors.map(author => `<option>${author}</option>`).join('')}`;
   html += `</optgroup>`
   html += `<optgroup label ="Price Interval">`
-  html += `<option>0 - 100</option>`;
-  html += `<option>100 - 200</option>`;
-  html += `<option>200 - 300</option>`;
-  html += `<option>300 - 400</option>`;
+  html += `${priceIntervals.map(interval => `<option>${interval}</option>`).join('')}`;
   html += `</optgroup>`
   html += `</select>`;
   html += `</label>`;
   html += `<label class="col-sm-4">Sorts: `;
   html += `<select class="sortbar" id="sortbar">`;
-  html += `<option>Recommended</option>`;
-  html += `<option>Title Asc</option>`;
-  html += `<option>Title Desc</option>`;
-  html += `<option>Price Asc</option>`;
-  html += `<option>Price Desc</option>`;
-  html += `<option>Author Asc</option>`;
-  html += `<option>Author Desc</option>`;
+  html += `${sortingOptions.map(option => `<option>${option}</option>`).join('')}`;
   html += `</select>`;
   html += `</label>`;
   html += `</div>`;
