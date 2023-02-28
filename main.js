@@ -125,7 +125,7 @@ function openModal(book) {
   modalHtml += `<div class="modal-dialog modal-lg">`
   modalHtml += `<div class="modal-content">`
   modalHtml += `<button type="button" class="btn-close float-end close" aria-label="Close"></button>`
-  modalHtml += '<img src="./images/dummy.jpg" class="rounded mx-auto d-block">'
+  modalHtml += `<img src="./images/${book.imgname}" class="rounded mx-auto d-block">`
   modalHtml += `<div> Price: ${book.price}$ </div>` 
   modalHtml += `<div class="booktitle"> ${book.title} </div>`
   modalHtml += `<div class="description"> ${book.description} </div>`
@@ -181,7 +181,7 @@ function populateMainPage() {
   html += '<div class="row">'
   for (let book of filteredBooks) {
     html += '<div class="col-sm-4 col-lg-3 cardview" id="tablerow">';
-    html += '<img src="./images/dummy.jpg" >';
+    html += `<img src="./images/${book.imgname}" >`;
     html += `<div class="bookprice"> Price: ${book.price}$ </div>`;
     html += `<div class="booktitle"> ${book.title} </div>`;
     html += `<div class="author"> ${book.author} </div>`;
@@ -278,11 +278,9 @@ function sortByPrice(order) {
   if (order === 'desc'){filteredBooks = filteredBooks.sort((a, b) =>  b.price - a.price)}
 }
 
-
 function sortById() {
   filteredBooks = filteredBooks.sort((a, b) => a.id - b.id);
 }
-
 
 
 function sortByTitle(order) {
