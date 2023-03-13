@@ -51,7 +51,7 @@
     "description": "HTML - or Hyper Text Markup Language is the standard markup language to display content in a web browser and plays a crucial role that webpages are accessible and usable for its endusers. It uses different kinds of tags in order to structure the content to be displayed. Depending on what type of element you would like to display there’s a different tag, and HTML allows you to display many types of content, such as images, links, forms, tables and lists. One takeaway is however that HTML alone will only be able to create a basic structure of the web page. This means that in order to make your webpage look better, you’d have to use for example CSS or a framework in conjunction with HTML. Should you want to make it interactive you can use for example JavaScript to generate the HTML code dynamically. To make it easier and more effective, frameworks have been created to assist us, such as Bootstrap or React. HTML is considered to be an easy to learn language, as its syntax is straight forward and there’s lots of good documentation online. However, in order to do good-practice HTML projects, it requires you to make sure to select appropriate tags, as well as structuring the tags in a way so it can be styled properly. This can be both challenging and requires time and effort to accomplish. The rapid speed of growth in technology, such as new devices and the fact that high-end webpages are getting advanced forces HTML to constantly evolve both in order to fulfill the needs of developers to create high-quality contents for all kinds of platforms, as well as for everyone who browses the web.",
     "category": "HTML",
     "price": 170,
-    "imgname": "cover17.jpg"  
+    "imgname": "cover6.jpg"  
   },
   {
     "id": 7,
