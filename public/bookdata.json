@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Responsive design with Bootstrap",
     "author": "Robin Cobanov",
-    "description": "Bootstrap is a popular frontend framework, created by Twitter. It is an open-source CSS framework that helps to create responsive and mobile-first websites. Where one of its key advantages is how Bootstrap can be used to minimize the need of writing CSS code separately by using different classes inside the HTML tags. Bootstrap provides several different CSS classes which you apply to the HTML elements, this includes for example specifying the grid system. The grid system is one of the major advantages of bootstrap, which is a layout system that allows developers to specify a container with rows and columns, that will adjust to the screen-size of the device browsing the website. The responsiveness is another of the key advantages of bootstrap – as the major part of devices browsing the web now are mobile devices. Bootstrap also comes with a large amount of components, such as buttons, modals and navigation bars which are easy to implement and easy to keep building on to fit your project. One of bootstraps drawbacks is the fact that it is so widely used, that web applications have started to look very similar, which brings the feeling of “just another bootstrap site”. This is because the developers tend to use the bootstrap components and forget about customizations. You are however able to avoid this by adding some CSS in order to customize your page. All in all, Bootstrap is a great framework if you want to create responsive web-sites and the pre-built components will really speed up the work to create nice and user-friendly web pages that works on all devices and browsers. ",
+    "description": "Bootstrap is a popular frontend framework, created by Twitter. It is an open-source CSS framework that helps to create responsive and mobile-first websites. Where one of its key advantages is how it can help you make your web-page work cross-browser. Another advantage is how Bootstrap can be used to minimize the need of writing CSS code separately by using different classes inside the HTML tags. Bootstrap provides several different CSS classes which you apply to the HTML elements, this includes for example specifying the grid system. The grid system is one of the major advantages of bootstrap, which is a layout system that allows developers to specify a container with rows and columns, that will adjust to the screen-size of the device browsing the website. The responsiveness is another of the key advantages of bootstrap – as the major part of devices browsing the web now are mobile devices. Bootstrap also comes with a large amount of components, such as buttons, modals and navigation bars which are easy to implement and easy to keep building on to fit your project. One of bootstraps drawbacks is the fact that it is so widely used, that web applications have started to look very similar, which brings the feeling of “just another bootstrap site”. This is because the developers tend to use the bootstrap components and forget about customizations. You are however able to avoid this by adding some CSS in order to customize your page. All in all, Bootstrap is a great framework if you want to create responsive web-sites and the pre-built components will really speed up the work to create nice and user-friendly web pages that works on all devices and browsers. ",
     "category": "UX",
     "price": 150,
     "imgname": "cover1.jpg"  
@@ -48,10 +48,10 @@
     "id": 6,
     "title": "HTML- an introduction",
     "author": "Robin Cobanov",
-    "description": "HTML - or Hyper Text Markup Language is the standard markup language to display content in a web browser and plays a crucial role that webpages are accessible and usable for endusers. It uses different kinds of tags in order to structure the content to be displayed. Depending on what type of element you would like to display there’s a different tag, and HTML allows you to display many types of content, such as images, links, forms, tables, lists. One takeaway is however that HTML alone will only be able to create a basic structure of the web page. This means that if you want to add some styling, you’d have to use for example CSS, or if you want to make it interactive you can use for example JavaScript. To make it easier and more effective, frameworks have been created to assist us, such as Bootstrap or React. HTML is considered to be an easy to learn language, as its syntax is straightforward and there’s lots of good documentation online. However, in order to do good-practice HTML projects, it requires you to make sure to select appropriate tags, as well as structuring the tags in a way so it can be styled properly. This can be both challenging and requires time and effort. The rapid speed of growth in technology, such as new devices and the fact that high-end webpages are getting advanced forces HTML to constantly evolve both in order to fulfill the needs of developers to create high-quality contents for all kinds of platforms, as well as for everyone who browses the web.",
+    "description": "HTML - or Hyper Text Markup Language is the standard markup language to display content in a web browser and plays a crucial role that webpages are accessible and usable for its endusers. It uses different kinds of tags in order to structure the content to be displayed. Depending on what type of element you would like to display there’s a different tag, and HTML allows you to display many types of content, such as images, links, forms, tables and lists. One takeaway is however that HTML alone will only be able to create a basic structure of the web page. This means that in order to make your webpage look better, you’d have to use for example CSS or a framework in conjunction with HTML. Should you want to make it interactive you can use for example JavaScript to generate the HTML code dynamically. To make it easier and more effective, frameworks have been created to assist us, such as Bootstrap or React. HTML is considered to be an easy to learn language, as its syntax is straight forward and there’s lots of good documentation online. However, in order to do good-practice HTML projects, it requires you to make sure to select appropriate tags, as well as structuring the tags in a way so it can be styled properly. This can be both challenging and requires time and effort to accomplish. The rapid speed of growth in technology, such as new devices and the fact that high-end webpages are getting advanced forces HTML to constantly evolve both in order to fulfill the needs of developers to create high-quality contents for all kinds of platforms, as well as for everyone who browses the web.",
     "category": "HTML",
     "price": 170,
-    "imgname": "cover6.jpg"  
+    "imgname": "cover17.jpg"  
   },
   {
     "id": 7,
@@ -65,7 +65,7 @@
   {
     "id": 8,
     "title": "HTML for Web Designers",
-    "author": "Jeremy Keith:",
+    "author": "Jeremy Keith",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
     "category": "HTML",
     "price": 350,
@@ -93,15 +93,15 @@
     "id": 11,
     "title": "CSS - an introduction",
     "author": "Robin Cobanov",
-    "description": "CSS – or Cascading Style Sheets is a style sheet language that is used to style and make a document more appealing. As HTML alone can only display a basic structure of a webpage, CSS can be used in conjunction with HTML to style the web page. While writing CSS, you set rules in order to define the properties of either a specific element, or a group of elements, or perhaps the entire webpage. You can for example target a specific tag from the HTML, or a specific class or ID that is defined within the HTML. There are many different properties that can be used, which includes both fonts, borders, backgrounds, colors as well as aligning the HTML elements which can be a challenging task. These rules can also be applied to different screen-sizes, which means that you can make your website responsive to work on different screen-sizes and devices by perhaps changing font size or positioning of elements if the screen is small. Several frameworks have been created to simplify styling of webpages and to make them responsive, such as Bootstrap(created by Twitter). CSS can be a challenge to learn if you have limited HTML knowledge. As your CSS-rules are targeting the HTML elements it will be beneficial if they are structured in a smart way. If an experienced developer creates the HTML, it will be easier to style than if someone that is just learning HTML is creating the HTML structure, both because of the use of appropriate tags and how the HTML is structured.",
+    "description": "CSS – or Cascading Style Sheets is a style sheet language that is used to style and make a document more appealing. As HTML alone can only display a basic structure of a webpage, CSS can be used in conjunction with HTML to style the web page. While writing CSS, you set rules in order to define the properties of either a specific element, or a group of elements, or perhaps the entire webpage. You can for example target a specific tag from the HTML, or a specific class or ID that is defined within the HTML. There are many different properties that can be used, which includes both fonts, borders, backgrounds, colors as well as aligning the HTML elements which can be a challenging task. These rules can also be applied to different screen-sizes, which means that you can make your website responsive to work on different screen-sizes and devices by perhaps changing font size or positioning of elements if the screen is small. Several frameworks have been created to simplify styling of webpages and to make them responsive, such as Bootstrap(created by Twitter). However, it is common to use CSS on top of these frameworks in order to customize your page to make it more personal or perhaps fit the project requirements. CSS can be a challenge to learn if you have limited HTML knowledge. As your CSS-rules are targeting the HTML elements it will be beneficial if they are structured in a smart way. If an experienced developer creates the HTML, it will be easier to style than if someone that is just learning HTML is creating the HTML structure, both because of the use of appropriate tags and how the HTML is structured.",
     "category": "CSS",
     "price": 30,
     "imgname": "cover11.jpg"  
   },
   {
     "id": 12,
-    "title": "CSS For Dummies 1",
-    "author": "Stephen Andy Harris",
+    "title": "CSS - now and forever",
+    "author": "JK. Rowling",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
     "category": "CSS",
     "price": 40,
@@ -109,7 +109,7 @@
   },
   {
     "id": 13,
-    "title": "CSS For Dummies 2",
+    "title": "CSS For Dummies",
     "author": "Stephen Andy Harris",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
     "category": "CSS",
@@ -118,7 +118,7 @@
   },
   {
     "id": 14,
-    "title": "CSS For Dummies 3",
+    "title": "Make stuff prettier with CSS",
     "author": "Stephen Andy Harris",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
     "category": "CSS",
@@ -127,8 +127,8 @@
   },
   {
     "id": 15,
-    "title": "CSS For Dummies 4",
-    "author": "Stephen Andy Harris",
+    "title": "The one with CSS",
+    "author": "JK. Rowling",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
     "category": "CSS",
     "price": 120,
@@ -145,8 +145,8 @@
   },
   {
     "id": 17,
-    "title": "JS For Dummies 1",
-    "author": "Stephen Andy Harris",
+    "title": "Script with JS",
+    "author": "Some Author",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
     "category": "JavaScript",
     "price": 270,
@@ -154,7 +154,7 @@
   },
   {
     "id": 18,
-    "title": "JS For Dummies 2",
+    "title": "Dynamic features using JS",
     "author": "Stephen Andy Harris",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
     "category": "JavaScript",
@@ -163,8 +163,8 @@
   },
   {
     "id": 19,
-    "title": "JS For Dummies 3",
-    "author": "Stephen Andy Harris",
+    "title": "JS and the Goblet of Fire",
+    "author": "JK. Rowling",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
     "category": "JavaScript",
     "price": 220,
@@ -172,7 +172,7 @@
   },
   {
     "id": 20,
-    "title": "JS For Dummies 4",
+    "title": "JS For Dummies",
     "author": "An author",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam officiis ipsum iusto laudantium natus suscipit necessitatibus consequatur saepe a at, soluta est provident voluptatibus perferendis quia placeat modi quaerat!",
     "category": "JavaScript",

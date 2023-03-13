@@ -183,7 +183,7 @@ function populateMainPage() {
     html += '<div class="col-sm-4 col-lg-3 cardview" id="tablerow">';
     html += `<img src="./images/${book.imgname}" >`;
     html += `<div class="bookprice"> Price: ${book.price}$ </div>`;
-    html += `<div class="booktitle"> ${book.title} </div>`;
+    html += `<div class="booktitle" style="text-align: center"> ${book.title} </div>`;
     html += `<div class="author"> ${book.author} </div>`;
     html += `<div class="category"> ${book.category} </div>`;
     html += `<div class="buttons">`;
